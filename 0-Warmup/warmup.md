@@ -17,8 +17,13 @@ Please provide answers to these questions using markdown notation and place them
 
 
 3. Please provide a link to the repository you are using for this class.
-    [Repository](https://github.com/ecd88/CS-283.git)
+    
+[Repository](https://github.com/ecd88/CS-283.git)
+
 4. Briefly describe what you want to get out of this class.
-    A foundational understanding of Linux and operating systems.
+    
+A foundational understanding of Linux and operating systems.
+
 5. Briefly describe any concerns you might be having with being successful in this class (if any).
-    Added CS as a minor, still working on becoming familiar with 
+    
+Added CS as a minor, still working on becoming familiar with using tools.
