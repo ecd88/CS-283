@@ -55,6 +55,8 @@ int main(int argc, char *argv[]) {
         exit(3);
     }
 
+    //TODO: #5 Implement the other cases for 'r' and 'w' by extending
+    //      the case statement options
     switch (option) {
         case 'c':
             return_code = count_words(buffer, BUFFER_SZ, input_length);
@@ -264,3 +266,16 @@ int search_replace(char *buffer, int input_length, char *find, char *replace) {
 
     return 0;
 }
+
+//TODO:  #7  Notice all of the helper functions provided in the 
+//          starter take both the buffer as well as the length.  Why
+//          do you think providing both the pointer and the length
+//          is a good practice, after all we know from main() that 
+//          the buff variable will have exactly 50 bytes?
+//  
+//          PLACE YOUR ANSWER HERE
+
+//Passing both the buffer pointer and its length is good practice
+// because it helps prevent buffer overflows and makes the code more
+// flexible if the buffer size ever changes. It also improves readability
+// and ensures functions work correctly without assuming a fixed size.
