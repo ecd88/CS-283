@@ -1,0 +1,15 @@
+1. Your shell forks multiple child processes when executing piped commands. How does your implementation ensure that all child processes complete before the shell continues accepting user input? What would happen if you forgot to call waitpid() on all child processes?
+
+My implementation ensures all child processes finish before the shell accepts new input by calling waitpid() on each forked process. This prevents zombie processes, which occur when completed processes linger because their exit status hasn’t been collected. Without waitpid(), the shell could continue running while child processes remain in the system, consuming resources. Properly waiting for all child processes ensures efficient process management and prevents system slowdowns.
+
+2. The dup2() function is used to redirect input and output file descriptors. Explain why it is necessary to close unused pipe ends after calling dup2(). What could go wrong if you leave pipes open?
+
+After using dup2() to redirect input and output, it is crucial to close unused pipe ends to prevent file descriptor leaks and deadlocks. If pipes remain open, processes may hang indefinitely, waiting for input that never arrives. Additionally, open pipes can cause the shell to run out of available file descriptors, preventing new processes from being created. Closing unnecessary pipe ends ensures proper resource management and avoids unexpected behavior in piped execution.
+
+3. Your shell recognizes built-in commands (cd, exit, dragon). Unlike external commands, built-in commands do not require execvp(). Why is cd implemented as a built-in rather than an external command? What challenges would arise if cd were implemented as an external process?
+
+cd is a built-in command because changing directories affects the shell’s environment. If implemented as an external command, it would run in a separate child process, changing the working directory only for that process and not the shell itself. This would make cd ineffective for interactive use. By keeping it built-in, the shell can modify its own working directory, ensuring directory changes persist across commands.
+
+4. Currently, your shell supports a fixed number of piped commands (CMD_MAX). How would you modify your implementation to allow an arbitrary number of piped commands while still handling memory allocation efficiently? What trade-offs would you need to consider?
+
+To support unlimited piped commands, I would replace the fixed-size array (CMD_MAX) with dynamic memory allocation, using realloc() or a linked list. This would allow commands to be added as needed, rather than being limited by a predefined size. However, dynamic allocation introduces trade-offs, such as increased complexity, potential memory fragmentation, and performance overhead from frequent memory reallocations. A balanced approach is needed to ensure flexibility while maintaining efficiency.
